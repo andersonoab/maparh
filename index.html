@@ -49,12 +49,42 @@ footer{height:26px;background:var(--p);color:#fff;display:flex;justify-content:s
 .linksHelp{font-size:12px;color:var(--muted);line-height:1.5;background:#f5fafc;border:1px solid var(--bd);border-radius:8px;padding:9px 10px;margin-bottom:12px}.linksHelp b{color:var(--dk)}
 .quickAssign{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:7px;padding-top:6px;border-top:1px dashed #dbe5ea}.quickAssign span{font-size:9px;color:var(--muted);margin-right:2px}.quickAssign button{border:1px solid var(--bd);background:#fff;border-radius:10px;padding:2px 6px;font-size:9px;cursor:pointer;color:var(--dk)}.quickAssign button:hover{border-color:var(--p);background:#eef8fd}.quickAssign button.current{font-weight:700;box-shadow:inset 0 0 0 1px currentColor}
 
+
+/* v14 — Estrutura (matriz Combinado x Real) */
+#structView{flex-direction:column;background:var(--bg)}
+.structWrap{flex:1;min-height:0;display:flex;flex-direction:column;padding:12px 14px;gap:10px}
+.structHead{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.structHead h2{font:700 18px Rufina,serif;color:var(--dk);margin:0 0 4px}
+.structHead p{font-size:11px;color:var(--muted);margin:0;max-width:640px;line-height:1.5}
+.structTotals{display:flex;gap:8px;flex-wrap:wrap}
+.structKpi{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:7px 12px;min-width:96px}
+.structKpi b{display:block;font-size:17px;color:var(--dk)}
+.structKpi span{font-size:10px;color:var(--muted)}
+.structKpi.warn b{color:var(--warn)}
+.structKpi.danger b{color:var(--danger)}
+.structScroll{flex:1;min-height:0;overflow:auto;background:#fff;border:1px solid var(--bd);border-radius:9px}
+.structTable{border-collapse:separate;border-spacing:0;width:100%;font-size:12px}
+.structTable th,.structTable td{border-bottom:1px solid #edf1f3;border-right:1px solid #f2f5f7;padding:7px 9px;text-align:center;white-space:nowrap}
+.structTable thead th{position:sticky;top:0;background:#f2f7fa;color:var(--dk);z-index:3;font-weight:700}
+.structTable .rowh{position:sticky;left:0;background:#fff;text-align:left;font-weight:500;color:var(--txt);z-index:2;max-width:300px;white-space:normal;cursor:pointer}
+.structTable thead .rowh{z-index:4;background:#f2f7fa}
+.structTable td{cursor:pointer}
+.structTable tbody td:hover{background:#eef6fa}
+.structTable td.zero{color:#c3cdd4}
+.structTable td.divergent{box-shadow:inset 0 0 0 2px rgba(125,0,65,.45)}
+.structTable td.unassigned{background:#fdf6ec;color:#8a6100;font-weight:700}
+.structTable .linkDot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--p);margin-right:4px;vertical-align:middle}
+.colDot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.altaSup{color:var(--ac1);font-weight:700;margin-left:2px;font-size:10px}
+.orphanTag{display:inline-block;font-size:9px;color:#fff;background:var(--warn);border-radius:8px;padding:1px 6px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+.totRow td{background:#f7fafc;font-weight:700;color:var(--dk)}
+.structTable td.tot,.structTable th.tot{background:#f2f7fa;font-weight:700}
 </style>
 </head>
 <body>
 <header>
- <div class="brand"><h1>Mapa DP/RH — Visão Obsidian v13</h1><small>Coordenação → colaboradores → 16 pilares → redistribuição assistida</small></div>
- <div class="navtabs"><button class="tab active" data-view="mapView">Mapa</button><button class="tab" data-view="boardView">Distribuição</button></div>
+ <div class="brand"><h1>Mapa DP/RH — Visão Obsidian v14</h1><small>Coordenação → colaboradores → 16 pilares → matriz de estrutura → redistribuição assistida</small></div>
+ <div class="navtabs"><button class="tab active" data-view="mapView">Mapa</button><button class="tab" data-view="boardView">Distribuição</button><button class="tab" data-view="structView">Estrutura</button></div>
  <div class="header-actions"><button class="headbtn" onclick="openTeamModal()">Equipe</button><button class="headbtn" onclick="openColorModal()">Cores</button><button class="headbtn" onclick="openLinksModal()">Frentes</button><button class="headbtn" onclick="exportJSON()">Exportar JSON</button><button class="headbtn" onclick="document.getElementById('fileImport').click()">Importar</button><button class="headbtn" onclick="exportSnapshot()">Compartilhar HTML</button></div>
 </header>
 <div id="mapToolbar" class="toolbar">
@@ -71,6 +101,8 @@ footer{height:26px;background:var(--p);color:#fff;display:flex;justify-content:s
 <div id="boardToolbar" class="toolbar hidden">
  <button class="btn primary" onclick="addAction()">+ Nova ação</button>
  <button class="btn" onclick="exportCSV()">Exportar CSV</button>
+ <select id="bulkAssignSelect" class="btn" title="Aplica o responsável escolhido a todas as ações do filtro atual (busca, frente, status, prioridade, fonte e filtro do mapa)" onchange="bulkAssignFiltered()"><option value="">Atribuir filtrados a…</option></select>
+ <button class="btn" onclick="reclassifyPrograms()" title="Recalcula a frente de cada ação a partir do texto e da frente de origem, usando as regras corrigidas de palavra inteira">Reclassificar frentes</button>
  <button class="btn" onclick="openTeamModal()">Editar equipe</button>
  <span style="font-size:11px;color:var(--muted)">Clique em Editar ou no título · arraste somente pelo ↕ para trocar o responsável</span>
  <span class="spacer"></span><span class="statusline" id="boardCount"></span>
@@ -98,6 +130,18 @@ footer{height:26px;background:var(--p);color:#fff;display:flex;justify-content:s
   </div>
   <div class="loadstrip" id="loadStrip"></div>
   <div class="boardScroller"><div class="board" id="board"></div></div>
+ </section>
+ <section id="structView" class="view">
+  <div class="structWrap">
+   <div class="structHead">
+    <div>
+     <h2>Estrutura — Combinado × Real</h2>
+     <p>Cada célula mostra as ações ativas (não concluídas) do pilar por responsável; o número em vinho sobrescrito é a quantidade de prioridade Alta. Ponto azul = pessoa ligada ao pilar no mapa (combinado). Contorno vinho = pessoa executa sem ligação combinada. A coluna Sem dono concentra o que ainda precisa ser distribuído. Clique em qualquer célula ou no nome do pilar para abrir a Distribuição já filtrada.</p>
+    </div>
+    <div class="structTotals" id="structTotals"></div>
+   </div>
+   <div class="structScroll"><table class="structTable" id="structTable"></table></div>
+  </div>
  </section>
 </main>
 <aside class="sidepanel" id="panel"><div class="panelInner" id="panelInner"></div></aside>
@@ -138,8 +182,11 @@ const SONOVA_COLORS = [
 ];
 const STRONG_PILLAR_ORDER=['SST & Saúde Ocupacional','Saúde, Odonto & Copay','CCT, Sindical & Relações Trabalhistas','Remuneração Variável, PLR & VCC','Desligamentos & Rescisões','Férias & Afastamentos','Ponto & Jornada','eSocial & Obrigações','Admissão & Movimentações','Atendimento RH & Chamados','BI, Indicadores & Budget','Auditoria & Compliance','Benefícios & Fornecedores','Cadastros & Documentação','Folha & Encargos','Projetos, Integrações & Incorporações'];
 function normFrontText(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim()}
-function guessPillar(a){const cur=normFrontText(a?.program);const exact=PILLARS.find(p=>normFrontText(p.label)===cur);if(exact)return exact.label;const title=normFrontText(a?.title);for(const label of STRONG_PILLAR_ORDER){const p=PILLARS.find(x=>x.label===label);if(p&&p.keywords.some(k=>title.includes(normFrontText(k))))return p.label}for(const p of PILLARS){if(p.aliases.some(x=>cur===normFrontText(x)))return p.label}const rest=normFrontText([a?.description,a?.notes,a?.sourceDetail,Array.isArray(a?.tags)?a.tags.join(' '):''].join(' '));let best={score:0,label:'Projetos, Integrações & Incorporações'};for(const p of PILLARS){let score=0;for(const alias of p.aliases){const n=normFrontText(alias);if(n&&cur.includes(n))score+=5}for(const kw of p.keywords){const n=normFrontText(kw);if(!n)continue;if(title.includes(n))score+=12;if(cur.includes(n))score+=3;if(rest.includes(n))score+=1}if(score>best.score)best={score,label:p.label}}return best.label}
-function normalizeActionFront(a){a=a||{};const old=String(a.program||'').trim();const next=guessPillar(a);if(old&&old!==next&&!a.originalProgram)a.originalProgram=old;a.program=next;return a}
+const FALLBACK_PILLAR='Projetos, Integrações & Incorporações';
+function kwHit(haystack,kwNorm){if(!kwNorm)return false;if(/[^a-z0-9]/.test(kwNorm))return haystack.includes(kwNorm);let idx=haystack.indexOf(kwNorm);while(idx!==-1){const prev=idx===0?'':haystack.charAt(idx-1);if(!prev||!/[a-z0-9]/.test(prev))return true;idx=haystack.indexOf(kwNorm,idx+1)}return false}
+function guessPillar(a){const cur=normFrontText(a?.program);const exact=PILLARS.find(p=>normFrontText(p.label)===cur);if(exact)return exact.label;const title=normFrontText(a?.title);for(const label of STRONG_PILLAR_ORDER){const p=PILLARS.find(x=>x.label===label);if(p&&p.keywords.some(k=>kwHit(title,normFrontText(k))))return p.label}for(const p of PILLARS){if(p.aliases.some(x=>cur===normFrontText(x)))return p.label}const rest=normFrontText([a?.description,a?.notes,a?.sourceDetail,Array.isArray(a?.tags)?a.tags.join(' '):''].join(' '));let best={score:0,label:FALLBACK_PILLAR};for(const p of PILLARS){let score=0;for(const alias of p.aliases){const n=normFrontText(alias);if(n&&cur.includes(n))score+=5}for(const kw of p.keywords){const n=normFrontText(kw);if(!n)continue;if(kwHit(title,n))score+=12;if(kwHit(cur,n))score+=3;if(kwHit(rest,n))score+=1}if(score>best.score)best={score,label:p.label}}return best.label}
+function hasFallbackSignal(a){const p=PILLARS.find(x=>x.label===FALLBACK_PILLAR);if(!p)return true;const title=normFrontText(a?.title);const rest=normFrontText([a?.description,a?.notes,a?.sourceDetail,Array.isArray(a?.tags)?a.tags.join(' '):''].join(' '));const orig=normFrontText(a?.originalProgram||'');if(orig&&p.aliases.some(x=>{const n=normFrontText(x);return n&&(orig===n||orig.includes(n))}))return true;return p.keywords.some(kw=>{const n=normFrontText(kw);return n&&(kwHit(title,n)||kwHit(rest,n))})}
+function normalizeActionFront(a){a=a||{};const old=String(a.program||'').trim();const next=guessPillar(a);if(old&&old!==next&&!a.originalProgram)a.originalProgram=old;a.program=next;a.autoClassified=(next===FALLBACK_PILLAR)&&!hasFallbackSignal(a);return a}
 function pillarOptions(selected){return PILLARS.map(p=>`<option value="${esc(p.label)}" ${p.label===selected?'selected':''}>${esc(p.label)}</option>`).join('')}
 function sonovaColorOptions(selected){const found=SONOVA_COLORS.some(c=>c.hex.toLowerCase()===String(selected||'').toLowerCase());return SONOVA_COLORS.map(c=>`<option value="${c.hex}" ${c.hex.toLowerCase()===String(selected||'').toLowerCase()?'selected':''}>${esc(c.name)} · ${c.hex}</option>`).join('')+(!found&&selected?`<option value="${esc(selected)}" selected>Cor atual · ${esc(selected)}</option>`:'')}
 const DEFAULT_EDGES = [["coord","p-jair","s"],["coord","p-sabrina","s"],["coord","p-jameson","s"],["coord","p-anaclara","s"],["coord","p-eduarda","s"],["p-jair","m-folha","s"],["p-jair","m-esocial","s"],["p-jair","m-ferias","s"],["p-jair","m-desl","s"],["p-jair","m-rem","s"],["p-eduarda","m-adm","s"],["p-eduarda","m-benef","s"],["p-eduarda","m-saude","s"],["p-anaclara","m-proj","s"],["p-anaclara","m-benef","s"],["p-anaclara","m-atend","s"],["p-anaclara","m-folha","s"],["p-sabrina","m-benef","s"],["p-sabrina","m-sst","s"],["p-sabrina","m-atend","s"],["p-sabrina","m-saude","s"],["p-jameson","m-atend","s"],["p-jameson","m-ponto","s"],["coord","m-audit","s"],["coord","m-cct","s"],["coord","m-bi","s"],["coord","m-rem","s"],["coord","m-cadastro","s"]];
@@ -177,7 +224,7 @@ function applyState(x,rerender=true){state=x;NODES=(x.nodes||[]).map(normalizeNo
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
 
 // Views
-function activateView(viewId){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===viewId));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===viewId));const board=viewId==='boardView';document.getElementById('mapToolbar').classList.toggle('hidden',board);document.getElementById('boardToolbar').classList.toggle('hidden',!board);if(board)renderBoard();else{resize();draw()}}
+function activateView(viewId){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===viewId));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===viewId));const board=viewId==='boardView';const struct=viewId==='structView';document.getElementById('mapToolbar').classList.toggle('hidden',board||struct);document.getElementById('boardToolbar').classList.toggle('hidden',!board);if(board)renderBoard();else if(struct)renderStructure();else{resize();draw()}}
 const tabs=document.querySelectorAll('.tab');tabs.forEach(t=>t.onclick=()=>activateView(t.dataset.view));
 
 // Map engine
@@ -194,7 +241,7 @@ function visible(n){return layerVisible[n.layer]!==false}
 function neighborSet(node){const s=new Set([node]);edgesResolved.forEach(e=>{if(e.a===node)s.add(e.b);if(e.b===node)s.add(e.a)});return s}
 function normalizeSearchText(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
 function actionHaystack(a){return normalizeSearchText([a.title,a.source,a.program,a.description,a.notes,(a.tags||[]).join(' ')].join(' '))}
-function actionMatchesNode(a,n){if(!n||n.layer!=='dado')return true;const pillar=PILLARS.find(p=>p.nodeId===n.id);if(pillar&&a.program===pillar.label)return true;const h=actionHaystack(a);return (n.filterKeywords||[]).some(k=>h.includes(normalizeSearchText(k)))}
+function actionMatchesNode(a,n){if(!n||n.layer!=='dado')return true;const pillar=PILLARS.find(p=>p.nodeId===n.id);if(pillar&&a.program===pillar.label)return true;const h=actionHaystack(a);return (n.filterKeywords||[]).some(k=>kwHit(h,normalizeSearchText(k)))}
 function involvedOwnersForNode(n){const names=new Set();edgesResolved.forEach(e=>{if(e.b===n&&e.a.layer==='pessoa')names.add(e.a.owner||String(e.a.label).replace(/\n/g,' '));if(e.a===n&&e.b.layer==='pessoa')names.add(e.b.owner||String(e.b.label).replace(/\n/g,' '));if(e.b===n&&e.a.id==='coord')names.add('Anderson');if(e.a===n&&e.b.id==='coord')names.add('Anderson')});return [...names].filter(Boolean)}
 function setBoardContextFromNode(n,announce=true){if(!n)return;if(n.id==='coord'){boardContext=null}else if(n.layer==='dado'){boardContext={type:'macro',nodeId:n.id,label:String(n.label||'').replace(/\n/g,' '),owners:involvedOwnersForNode(n)}}else if(n.layer==='pessoa'){boardContext={type:'person',nodeId:n.id,label:String(n.label||'').replace(/\n/g,' '),owners:[n.owner||String(n.label||'').replace(/\n/g,' ')]}}else{return}scheduleSave();if(announce){const c=boardContext;if(c)toast('Distribuição preparada para: '+c.label);else toast('Filtro do mapa removido')}}
 function clearBoardContext(){boardContext=null;scheduleSave();renderBoard();toast('Filtro do mapa removido')}
@@ -352,17 +399,17 @@ document.addEventListener('keydown',e=>{
 function isoDate(v){return /^\d{4}-\d{2}-\d{2}/.test(v||'')?v.slice(0,10):''}
 function isOverdue(a){const d=isoDate(a.end);if(!d)return false;return new Date(d+'T23:59:59')<new Date()&&!['Concluído','Concluída','0-Concluído'].includes(a.status)}
 function renderBoardContextBar(){const el=document.getElementById('boardContextBar');if(!boardContext){el.classList.remove('show');el.innerHTML='';return}const n=byId[boardContext.nodeId];const count=boardContext.type==='macro'&&n?ACTIONS.filter(a=>actionMatchesNode(a,n)).length:ACTIONS.filter(a=>(a.owner||'')===(boardContext.owners?.[0]||'')).length;el.innerHTML=`<b>Filtro do mapa:</b> ${esc(boardContext.label)} <span>· ${count} ações · envolvidos: ${esc((boardContext.owners||[]).join(', ')||'a definir')}</span><button class="btn small" onclick="clearBoardContext()">Mostrar tudo</button>`;el.classList.add('show')}
-function populateFilters(){const status=[...new Set(ACTIONS.map(a=>a.status).filter(Boolean))].sort(),source=[...new Set(ACTIONS.flatMap(a=>String(a.source||'').split(' | ')).filter(Boolean))].sort(),program=PILLARS.map(p=>p.label);const fs=document.getElementById('filterStatus'),fr=document.getElementById('filterSource'),fp=document.getElementById('filterProgram');const sv=fs.value,rv=fr.value,pv=fp.value;fs.innerHTML='<option value="">Todos os status</option>'+status.map(x=>`<option ${x===sv?'selected':''}>${esc(x)}</option>`).join('');fr.innerHTML='<option value="">Todas as fontes</option>'+source.map(x=>`<option ${x===rv?'selected':''}>${esc(x)}</option>`).join('');fp.innerHTML='<option value="">Todas as frentes</option>'+program.map(x=>`<option ${x===pv?'selected':''}>${esc(x)}</option>`).join('')}
-function filteredActions(){const q=document.getElementById('searchAction').value.toLowerCase(),s=document.getElementById('filterStatus').value,p=document.getElementById('filterPriority').value,src=document.getElementById('filterSource').value,prog=document.getElementById('filterProgram').value;const ctxNode=boardContext?.nodeId?byId[boardContext.nodeId]:null;return ACTIONS.filter(a=>{const contextOK=!boardContext||(boardContext.type==='macro'?actionMatchesNode(a,ctxNode):(boardContext.type==='person'?boardContext.owners.includes(a.owner):true));return contextOK&&(!q||[a.title,a.source,a.program,a.description,a.notes].join(' ').toLowerCase().includes(q))&&(!s||a.status===s)&&(!p||a.priority===p)&&(!prog||a.program===prog)&&(!src||String(a.source||'').split(' | ').includes(src))})}
+function populateFilters(){const status=[...new Set(ACTIONS.map(a=>a.status).filter(Boolean))].sort(),source=[...new Set(ACTIONS.flatMap(a=>String(a.source||'').split(' | ')).filter(Boolean))].sort(),program=PILLARS.map(p=>p.label);const fs=document.getElementById('filterStatus'),fr=document.getElementById('filterSource'),fp=document.getElementById('filterProgram');const sv=fs.value,rv=fr.value,pv=fp.value;fs.innerHTML='<option value="">Todos os status</option>'+status.map(x=>`<option ${x===sv?'selected':''}>${esc(x)}</option>`).join('');fr.innerHTML='<option value="">Todas as fontes</option>'+source.map(x=>`<option ${x===rv?'selected':''}>${esc(x)}</option>`).join('');fp.innerHTML='<option value="">Todas as frentes</option>'+program.map(x=>`<option ${x===pv?'selected':''}>${esc(x)}</option>`).join('')+`<option value="__auto__" ${pv==='__auto__'?'selected':''}>A classificar (sem sinal de frente)</option>`;const ba=document.getElementById('bulkAssignSelect');if(ba){ba.innerHTML='<option value="">Atribuir filtrados a…</option>'+TEAM.map(t=>`<option value="${esc(t.name)}">${esc(t.name)}</option>`).join('')+'<option value="__clear__">— Remover responsável —</option>'}}
+function filteredActions(){const q=document.getElementById('searchAction').value.toLowerCase(),s=document.getElementById('filterStatus').value,p=document.getElementById('filterPriority').value,src=document.getElementById('filterSource').value,prog=document.getElementById('filterProgram').value;const ctxNode=boardContext?.nodeId?byId[boardContext.nodeId]:null;return ACTIONS.filter(a=>{const contextOK=!boardContext||(boardContext.type==='macro'?actionMatchesNode(a,ctxNode):(boardContext.type==='person'?boardContext.owners.includes(a.owner):true));return contextOK&&(!q||[a.title,a.source,a.program,a.description,a.notes].join(' ').toLowerCase().includes(q))&&(!s||a.status===s)&&(!p||a.priority===p)&&(!prog||(prog==='__auto__'?!!a.autoClassified:a.program===prog))&&(!src||String(a.source||'').split(' | ').includes(src))})}
 function priorityRank(p){return{Alta:0,'Média':1,Baixa:2}[p]??3}
-function renderLoadStrip(){const people=[...TEAM.map(t=>t.name),'Sem responsável'];const active=ACTIONS.filter(a=>!String(a.status).toLowerCase().includes('conclu'));const max=Math.max(1,...people.map(name=>active.filter(a=>(a.owner||'Sem responsável')===name).length));document.getElementById('loadStrip').innerHTML=people.map(name=>{const arr=active.filter(a=>(a.owner||'Sem responsável')===name),late=arr.filter(isOverdue).length,pct=Math.round(arr.length/max*100),color=TEAM.find(t=>t.name===name)?.color||'#8ba5b5';return`<div class="loadcard" style="border-top:4px solid ${esc(color)}"><b>${esc(name)}</b><span>${arr.length} ativas · ${late} atrasadas</span><div class="loadbar"><i style="width:${pct}%;background:${esc(color)}"></i></div></div>`}).join('')}
+function renderLoadStrip(){const people=[...TEAM.map(t=>t.name),'Sem responsável'];const active=ACTIONS.filter(a=>!String(a.status).toLowerCase().includes('conclu'));const max=Math.max(1,...people.map(name=>active.filter(a=>(a.owner||'Sem responsável')===name).length));document.getElementById('loadStrip').innerHTML=people.map(name=>{const arr=active.filter(a=>(a.owner||'Sem responsável')===name),late=arr.filter(isOverdue).length,pct=Math.round(arr.length/max*100),color=TEAM.find(t=>t.name===name)?.color||'#8ba5b5';return`<div class="loadcard" style="border-top:4px solid ${esc(color)}"><b>${esc(name)}</b><span>${arr.length} ativas · ${late} atrasadas · carga ${arr.reduce((s,a)=>s+({Alta:3,'Média':2,Baixa:1}[a.priority]??2),0)}</span><div class="loadbar"><i style="width:${pct}%;background:${esc(color)}"></i></div></div>`}).join('')}
 function renderBoard(){populateFilters();renderBoardContextBar();const arr=filteredActions().sort((a,b)=>priorityRank(a.priority)-priorityRank(b.priority)||(isoDate(a.end)||'9999').localeCompare(isoDate(b.end)||'9999')||(a.order||0)-(b.order||0));let teamCols=TEAM;if(boardContext?.owners?.length){const involved=new Set(boardContext.owners);const actual=new Set(arr.map(a=>a.owner).filter(Boolean));teamCols=TEAM.filter(t=>involved.has(t.name)||actual.has(t.name)).sort((a,b)=>(involved.has(b.name)?1:0)-(involved.has(a.name)?1:0))}const hasUnassigned=arr.some(a=>!(a.owner||''));const cols=[...teamCols.map(t=>({name:t.name,role:t.role})),...(hasUnassigned?[{name:'',role:'Sem responsável'}]:[])];renderLoadStrip();document.getElementById('board').innerHTML=cols.map(c=>{const items=arr.filter(a=>(a.owner||'')===c.name);const colColor=TEAM.find(t=>t.name===c.name)?.color||'#8ba5b5';return`<div class="column" style="border-top:4px solid ${esc(colColor)}" data-owner="${esc(c.name)}" ondragover="event.preventDefault()" ondrop="dropAction(event,this.dataset.owner)"><div class="colHead"><div><b>${esc(c.name||'Sem responsável')}</b><br><small>${esc(c.role||'')}</small></div><small>${items.length}</small></div><div class="cards">${items.length?items.map(actionCardHTML).join(''):'<div class="empty">Nenhuma ação neste filtro</div>'}</div></div>`}).join('')||'<div class="empty">Nenhum envolvido encontrado para este filtro.</div>';document.getElementById('boardCount').textContent=arr.length+' ações exibidas de '+ACTIONS.length}
 function cardAction(event,id,action){event.preventDefault();event.stopPropagation();if(action==='edit')openActionPanel(id);else if(action==='duplicate')duplicateAction(id);else if(action==='delete')deleteAction(id)}
 
 function quickAssignAction(ev,id,owner){ev.preventDefault();ev.stopPropagation();const a=ACTIONS.find(x=>x.id===id);if(!a)return;a.owner=owner;scheduleSave();renderBoard();toast('Ação movida para '+owner)}
 function quickAssignHTML(a){if(boardContext?.type!=='macro'||!Array.isArray(boardContext.owners)||!boardContext.owners.length)return'';const safeId=String(a.id).replace(/'/g,"\\'");return `<div class="quickAssign"><span>Mover para:</span>${boardContext.owners.map(owner=>{const t=TEAM.find(x=>x.name===owner);const c=t?.color||'#0083CA';const safeOwner=String(owner).replace(/'/g,"\\'");return `<button type="button" class="${a.owner===owner?'current':''}" style="color:${esc(c)}" onclick="quickAssignAction(event,'${safeId}','${safeOwner}')">${esc(owner)}</button>`}).join('')}</div>`}
 
-function actionCardHTML(a){const late=isOverdue(a),date=isoDate(a.end),safeId=String(a.id).replace(/'/g,"\\'");return`<div class="actionCard prio-${esc(a.priority)}" tabindex="0" data-id="${esc(a.id)}"><div class="cardTop"><span class="cardDragHandle" draggable="true" data-drag-id="${esc(a.id)}" title="Arraste por aqui para trocar o responsável">↕</span><div class="cardTitle" data-card-action="edit" onclick="cardAction(event,'${safeId}','edit')">${esc(a.title)}</div><div class="cardQuickActions"><button type="button" title="Editar ação" data-card-action="edit" onclick="cardAction(event,'${safeId}','edit')">Editar</button><button type="button" title="Duplicar ação" data-card-action="duplicate" onclick="cardAction(event,'${safeId}','duplicate')">Duplicar</button><button type="button" class="danger" title="Excluir ação" data-card-action="delete" onclick="cardAction(event,'${safeId}','delete')">Excluir</button></div></div><div class="cardMeta"><span class="pill">${esc(a.priority||'Média')}</span><span class="pill">${esc(a.status||'')}</span>${a.program?`<span class="pill">${esc(a.program)}</span>`:''}${date?`<span class="pill ${late?'late':''}">${late?'Atrasada · ':''}${date.split('-').reverse().join('/')}</span>`:''}</div>${quickAssignHTML(a)}<div class="progress"><i style="width:${Math.max(0,Math.min(100,Number(a.progress)||0))}%"></i></div></div>`}
+function actionCardHTML(a){const late=isOverdue(a),date=isoDate(a.end),safeId=String(a.id).replace(/'/g,"\\'");return`<div class="actionCard prio-${esc(a.priority)}" tabindex="0" data-id="${esc(a.id)}"><div class="cardTop"><span class="cardDragHandle" draggable="true" data-drag-id="${esc(a.id)}" title="Arraste por aqui para trocar o responsável">↕</span><div class="cardTitle" data-card-action="edit" onclick="cardAction(event,'${safeId}','edit')">${esc(a.title)}</div><div class="cardQuickActions"><button type="button" title="Editar ação" data-card-action="edit" onclick="cardAction(event,'${safeId}','edit')">Editar</button><button type="button" title="Duplicar ação" data-card-action="duplicate" onclick="cardAction(event,'${safeId}','duplicate')">Duplicar</button><button type="button" class="danger" title="Excluir ação" data-card-action="delete" onclick="cardAction(event,'${safeId}','delete')">Excluir</button></div></div><div class="cardMeta"><span class="pill">${esc(a.priority||'Média')}</span><span class="pill">${esc(a.status||'')}</span>${a.program?`<span class="pill">${esc(a.program)}</span>`:''}${a.autoClassified?`<span class="pill" style="background:#fbf3e3;color:#8a6100" title="Está no pilar padrão sem nenhuma palavra-chave própria — revise a frente">a classificar</span>`:''}${date?`<span class="pill ${late?'late':''}">${late?'Atrasada · ':''}${date.split('-').reverse().join('/')}</span>`:''}</div>${quickAssignHTML(a)}<div class="progress"><i style="width:${Math.max(0,Math.min(100,Number(a.progress)||0))}%"></i></div></div>`}
 function dragAction(ev,id){window.__dragging=true;ev.dataTransfer.setData('text/plain',id);const card=ev.target.closest('.actionCard');if(card)card.classList.add('dragging')}
 document.getElementById('board').addEventListener('click',e=>{if(e.defaultPrevented)return;const card=e.target.closest('.actionCard');if(!card)return;const id=card.dataset.id,actionEl=e.target.closest('[data-card-action]');const action=actionEl?.dataset.cardAction||'edit';if(action==='edit')openActionPanel(id);else if(action==='duplicate')duplicateAction(id);else if(action==='delete')deleteAction(id)});
 document.getElementById('board').addEventListener('keydown',e=>{const card=e.target.closest('.actionCard');if(card&&e.key==='Enter'){e.preventDefault();openActionPanel(card.dataset.id)}});
@@ -396,9 +443,95 @@ function setNodeColor(id,color){const n=byId[id];if(!n)return;n.color=color;n.de
 function downloadBlob(content,type,name){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500)}
 function exportJSON(){saveState();downloadBlob(JSON.stringify(state,null,2),'application/json','mapa_dp_sonova_distribuicao.json');toast('JSON exportado')}
 function csvCell(v){const s=String(v??'').replace(/"/g,'""');return'"'+s+'"'}
+// ===== v14 — Atribuição em lote, reclassificação assistida e matriz de estrutura =====
+function bulkAssignFiltered(){
+ const sel=document.getElementById('bulkAssignSelect');const v=sel?sel.value:'';if(!v)return;if(sel)sel.value='';
+ const arr=filteredActions();
+ if(!arr.length){toast('Nenhuma ação no filtro atual');return}
+ if(v==='__clear__'){
+  const owned=arr.filter(a=>(a.owner||''));
+  if(!owned.length){toast('As ações do filtro já estão sem responsável');return}
+  if(!confirm('Remover o responsável de '+owned.length+' ações do filtro atual?'))return;
+  owned.forEach(a=>a.owner='');scheduleSave();renderBoard();toast(owned.length+' ações voltaram para Sem responsável');return;
+ }
+ const name=v;
+ const semDono=arr.filter(a=>!(a.owner||''));
+ const deOutros=arr.filter(a=>(a.owner||'')&&a.owner!==name);
+ if(!semDono.length&&!deOutros.length){toast('Todas as ações do filtro já estão com '+name);return}
+ let alvo=[];
+ if(semDono.length&&confirm('Atribuir '+semDono.length+' ações SEM responsável do filtro atual para '+name+'?'))alvo=alvo.concat(semDono);
+ if(deOutros.length&&confirm('Também transferir '+deOutros.length+' ações que hoje estão com outras pessoas para '+name+'?'))alvo=alvo.concat(deOutros);
+ if(!alvo.length){toast('Nenhuma alteração aplicada');return}
+ alvo.forEach(a=>a.owner=name);scheduleSave();renderBoard();toast(alvo.length+' ações atribuídas a '+name);
+}
+function reclassifyPrograms(){
+ const changes=[];
+ ACTIONS.forEach(a=>{
+  const sombra={title:a.title,description:a.description,notes:a.notes,sourceDetail:a.sourceDetail,tags:a.tags,program:a.originalProgram||''};
+  const next=guessPillar(sombra);
+  if(next!==a.program)changes.push({a,next});
+ });
+ if(!changes.length){toast('Nenhuma frente para reclassificar');return}
+ if(!confirm('Reclassificar '+changes.length+' de '+ACTIONS.length+' ações com base no texto e na frente de origem (regras corrigidas de palavra inteira)?\n\nA frente atual será preservada em originalProgram quando ainda não houver histórico. Atribuições manuais de frente podem ser recalculadas.'))return;
+ changes.forEach(({a,next})=>{const old=String(a.program||'').trim();if(old&&old!==next&&!a.originalProgram)a.originalProgram=old;a.program=next;a.autoClassified=(next===FALLBACK_PILLAR)&&!hasFallbackSignal(a)});
+ scheduleSave();renderBoard();toast(changes.length+' ações reclassificadas');
+}
+function structPersonNode(nm){
+ const persons=NODES.filter(x=>x.layer==='pessoa');
+ return persons.find(p=>(p.owner||String(p.label||'').replace(/\n/g,' '))===nm)||((byId.coord&&byId.coord.owner===nm)?byId.coord:null);
+}
+function structLinked(pid,mid){return EDGES.some(e=>(e[0]===pid&&e[1]===mid)||(e[0]===mid&&e[1]===pid))}
+function renderStructure(){
+ const table=document.getElementById('structTable');if(!table)return;
+ const macros=NODES.filter(n=>n.layer==='dado');
+ const rows=macros.map(n=>({node:n,pillar:PILLARS.find(p=>p.nodeId===n.id)})).filter(r=>r.pillar);
+ const people=TEAM.map(t=>t.name);
+ const active=ACTIONS.filter(a=>!String(a.status).toLowerCase().includes('conclu'));
+ const Wp={Alta:3,'Média':2,Baixa:1};
+ const cellActs=(label,owner)=>active.filter(a=>a.program===label&&(a.owner||'')===owner);
+ let html='<thead><tr><th class="rowh">Pilar</th>'+people.map(nm=>{const c=TEAM.find(t=>t.name===nm)?.color||'#8ba5b5';return '<th><span class="colDot" style="background:'+esc(c)+'"></span>'+esc(nm)+'</th>'}).join('')+'<th>Sem dono</th><th class="tot">Total</th></tr></thead><tbody>';
+ const colTotals={},colAlta={};people.concat(['']).forEach(nm=>{colTotals[nm]=0;colAlta[nm]=0});
+ rows.forEach(r=>{
+  const label=r.pillar.label,nodeId=r.node.id;
+  const anyLink=NODES.filter(x=>x.layer==='pessoa').some(p=>structLinked(p.id,nodeId))||structLinked('coord',nodeId);
+  const rowActs=active.filter(a=>a.program===label);
+  html+='<tr><td class="rowh" onclick="structOpen(\''+encodeURIComponent(label)+'\',\'__all__\')" title="Abrir Distribuição do pilar">'+esc(label)+(anyLink?'':' <span class="orphanTag">sem dono no mapa</span>')+'</td>';
+  people.forEach(nm=>{
+   const pNode=structPersonNode(nm);
+   const isLinked=pNode?structLinked(pNode.id,nodeId):false;
+   const arr=cellActs(label,nm);const alta=arr.filter(a=>a.priority==='Alta').length;
+   colTotals[nm]+=arr.length;colAlta[nm]+=alta;
+   const cls=[arr.length?'':'zero',(!isLinked&&arr.length)?'divergent':''].join(' ').trim();
+   html+='<td class="'+cls+'" onclick="structOpen(\''+encodeURIComponent(label)+'\',\''+encodeURIComponent(nm)+'\')" title="'+esc(label)+' · '+esc(nm)+(isLinked?' · ligado no mapa':' · sem ligação no mapa')+'">'+(isLinked?'<span class="linkDot"></span>':'')+(arr.length||'')+(alta?'<sup class="altaSup">'+alta+'</sup>':'')+'</td>';
+  });
+  const un=cellActs(label,'');const unAlta=un.filter(a=>a.priority==='Alta').length;colTotals['']+=un.length;colAlta['']+=unAlta;
+  html+='<td class="'+(un.length?'unassigned':'zero')+'" onclick="structOpen(\''+encodeURIComponent(label)+'\',\'\')" title="'+esc(label)+' · Sem responsável">'+(un.length||'')+(unAlta?'<sup class="altaSup">'+unAlta+'</sup>':'')+'</td>';
+  html+='<td class="tot">'+rowActs.length+'</td></tr>';
+ });
+ const grand=people.concat(['']).reduce((s,nm)=>s+colTotals[nm],0);
+ html+='<tr class="totRow"><td class="rowh">Total ativas</td>'+people.map(nm=>'<td>'+colTotals[nm]+(colAlta[nm]?'<sup class="altaSup">'+colAlta[nm]+'</sup>':'')+'</td>').join('')+'<td>'+colTotals['']+(colAlta['']?'<sup class="altaSup">'+colAlta['']+'</sup>':'')+'</td><td class="tot">'+grand+'</td></tr>';
+ const carga=nm=>active.filter(a=>(a.owner||'')===nm).reduce((s,a)=>s+(Wp[a.priority]??2),0);
+ html+='<tr class="totRow"><td class="rowh" title="Ativas ponderadas por prioridade: Alta 3 · Média 2 · Baixa 1">Carga ponderada</td>'+people.map(nm=>'<td>'+carga(nm)+'</td>').join('')+'<td>'+carga('')+'</td><td class="tot">—</td></tr></tbody>';
+ table.innerHTML=html;
+ const semDono=active.filter(a=>!(a.owner||'')).length;
+ const altaSemDono=active.filter(a=>!(a.owner||'')&&a.priority==='Alta').length;
+ const aClass=ACTIONS.filter(a=>a.autoClassified).length;
+ const tot=document.getElementById('structTotals');
+ if(tot)tot.innerHTML='<div class="structKpi"><b>'+active.length+'</b><span>ações ativas</span></div><div class="structKpi warn"><b>'+semDono+'</b><span>sem responsável</span></div><div class="structKpi danger"><b>'+altaSemDono+'</b><span>Alta sem responsável</span></div><div class="structKpi"><b>'+aClass+'</b><span>a classificar</span></div>';
+}
+function structOpen(labelEnc,ownerEnc){
+ const label=decodeURIComponent(labelEnc);
+ boardContext=null;scheduleSave();
+ populateFilters();
+ const fp=document.getElementById('filterProgram');if(fp)fp.value=label;
+ activateView('boardView');
+ const owner=ownerEnc==='__all__'?null:decodeURIComponent(ownerEnc);
+ toast('Distribuição filtrada: '+label+(owner===null?'':' · veja a coluna '+(owner||'Sem responsável')));
+}
+
 function exportCSV(){const cols=['id','title','owner','status','priority','start','end','progress','source','program','description','notes'];const rows=[cols.join(';'),...ACTIONS.map(a=>cols.map(c=>csvCell(a[c])).join(';'))];downloadBlob('\ufeff'+rows.join('\n'),'text/csv;charset=utf-8','acoes_time_dp_sonova.csv');toast('CSV exportado')}
 document.getElementById('fileImport').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x.actions)throw new Error('Formato inválido');const incoming=importCompatibleState(x);applyState(incoming,true);saveState();closePanel();toast(Number(x.version)>=7?'Arquivo importado':'Ações importadas para a estrutura v7')}catch(err){alert('Não foi possível importar: '+err.message)}};r.readAsText(f);e.target.value=''})
-function exportSnapshot(){saveState();const clone=document.documentElement.cloneNode(true);const old=clone.querySelector('#snapshot-state');if(old)old.remove();const s=document.createElement('script');s.id='snapshot-state';s.type='application/json';s.textContent=JSON.stringify(state).replace(/<\/script/gi,'<\\/script');clone.querySelector('body').appendChild(s);downloadBlob('<!DOCTYPE html>\n'+clone.outerHTML,'text/html;charset=utf-8','mapa_dp_sonova_compartilhavel.html');toast('HTML compartilhável gerado')}
+function exportSnapshot(){saveState();const clone=document.documentElement.cloneNode(true);const old=clone.querySelector('#snapshot-state');if(old)old.remove();const s=document.createElement('script');s.id='snapshot-state';s.type='application/json';s.textContent=JSON.stringify(state).replace(/<\/script/gi,'<\\/script');clone.querySelector('body').appendChild(s);downloadBlob(('<!DOCTYPE html>\n'+clone.outerHTML).replace(/const DEFAULT_ACTIONS = \[[^\n]*\];/,'const DEFAULT_ACTIONS = [];'),'text/html;charset=utf-8','mapa_dp_sonova_compartilhavel.html');toast('HTML compartilhável gerado')}
 async function resetAll(){if(!confirm('Restaurar a versão inicial e apagar alterações locais?'))return;localRemove(STORAGE_KEY);await idbRemove(STORAGE_KEY);location.reload()}
 
 // Init
