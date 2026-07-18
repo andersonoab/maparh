@@ -433,7 +433,16 @@
       <div class="metric ${coverage<state.processes.length?'warn':'good'}"><span>Cobertura</span><strong>${coverage}/${state.processes.length}</strong><small>${backup} processos com backup</small></div>`}
     function personColor(name){return state.memberColors?.[name]||DEFAULT_MEMBER_COLORS[name]||'#6EB4DC'}
     function polar(cx,cy,r,deg){const a=(deg-90)*Math.PI/180;return{x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)}}
-    function splitNode(x,y,r,owner,backup){x=Number(x);y=Number(y);const oc=personColor(owner),bc=personColor(backup);if(!owner)return`<circle cx="${x}" cy="${y}" r="${r}" fill="#ecebe5" stroke="#aeb5b8" stroke-width="2" stroke-dasharray="4 3"/>`;if(!backup||backup===owner)return`<circle cx="${x}" cy="${y}" r="${r}" fill="${oc}" stroke="#fff" stroke-width="3"/>`;return`<path d="M ${x} ${y-r} A ${r} ${r} 0 0 0 ${x} ${y+r} L ${x} ${y} Z" fill="${oc}"/><path d="M ${x} ${y-r} A ${r} ${r} 0 0 1 ${x} ${y+r} L ${x} ${y} Z" fill="${bc}"/><circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#fff" stroke-width="3"/>`}
+    function splitNode(x,y,r,owner,backup){
+      x=Number(x);y=Number(y);
+      const oc=personColor(owner),bc=personColor(backup);
+      const assigned=!owner?'Sem responsável atribuído':(!backup||backup===owner?`Responsável: ${owner}`:`Responsável: ${owner} · Backup: ${backup}`);
+      let shape='';
+      if(!owner)shape=`<circle cx="${x}" cy="${y}" r="${r}" fill="#ecebe5" stroke="#aeb5b8" stroke-width="2" stroke-dasharray="4 3"/>`;
+      else if(!backup||backup===owner)shape=`<circle cx="${x}" cy="${y}" r="${r}" fill="${oc}" stroke="#fff" stroke-width="3"/>`;
+      else shape=`<path d="M ${x} ${y-r} A ${r} ${r} 0 0 0 ${x} ${y+r} L ${x} ${y} Z" fill="${oc}"/><path d="M ${x} ${y-r} A ${r} ${r} 0 0 1 ${x} ${y+r} L ${x} ${y} Z" fill="${bc}"/><circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#fff" stroke-width="3"/>`;
+      return`<g class="assigned-node" aria-label="${esc(assigned)}"><title>${esc(assigned)}</title>${shape}</g>`;
+    }
     function labelLines(name){const words=String(name).split(/\s+/),lines=[''];for(const w of words){const last=lines.length-1;if((lines[last]+' '+w).trim().length>23&&lines.length<2)lines.push(w);else lines[last]=(lines[last]+' '+w).trim()}return lines}
     function renderMap(){
       const host=document.getElementById('mapView'),all=[...state.processes].sort((a,b)=>a.code.localeCompare(b.code,'pt-BR',{numeric:true})),visible=new Set(filteredProcesses().map(p=>p.id));
