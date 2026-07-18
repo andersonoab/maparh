@@ -51,6 +51,37 @@
     .check-row{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:11px 2px}.check-row-main{display:flex;gap:10px;align-items:flex-start;flex:1;min-width:250px;cursor:pointer}.check-row input{width:18px;height:18px;margin-top:1px;accent-color:var(--blue);cursor:pointer;flex:0 0 auto}.check-row.done .check-text,.check-row.done .check-text small{text-decoration:line-through;color:var(--muted)}.check-row:not(.done) .check-text,.check-row:not(.done) .check-text small{text-decoration:none!important}.check-row:not(.done) .check-text{color:var(--text)!important}.check-text{font-size:11px;line-height:1.4;flex:1;min-width:0}.check-text small{display:block;color:var(--muted);font-size:9px;margin-top:3px}.check-actions{display:flex;gap:5px;align-items:center;margin-left:auto}.check-actions .copy-card{white-space:nowrap}.coverage-picker{display:grid;grid-template-columns:repeat(2,minmax(180px,1fr));gap:7px;padding:9px;border:1px solid var(--line);border-radius:10px;background:rgba(110,180,220,.06)}.coverage-option{display:flex;align-items:center;gap:8px;padding:7px 9px;border:1px solid rgba(110,180,220,.45);border-radius:8px;background:#fff;font-size:10px;cursor:pointer}.coverage-option input{width:17px;height:17px;accent-color:var(--blue)}.coverage-summary{padding:10px 12px;border:1px solid #6EB4DC;border-radius:9px;background:rgba(110,180,220,.12);color:#003C64;font-size:10px;line-height:1.5}.coverage-badge rect{fill:#FFFFFF;stroke:#6EB4DC;stroke-width:1}.coverage-badge text{fill:#003C64;font-size:7px;font-weight:800;text-anchor:middle;dominant-baseline:middle}.card-actions{display:flex;gap:10px;align-items:center;margin-top:9px;flex-wrap:wrap}.card-actions button{margin-top:0!important}.copy-head{border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.14);color:#FFFFFF;border-radius:8px;padding:7px 9px;font-size:9px;font-weight:500;white-space:nowrap}.copy-card{display:inline-flex!important;align-items:center;gap:4px;border:1px solid var(--line)!important;background:#FFFFFF!important;color:#003C64!important;border-radius:7px!important;padding:5px 8px!important;font-size:9px!important;font-weight:500!important}.copy-card:hover{border-color:#0083CA!important;color:#0083CA!important}.team-list{display:flex;flex-direction:column;gap:9px}.team-member-row{display:grid;grid-template-columns:minmax(170px,1fr) 130px auto;gap:8px;align-items:end;padding:10px;border:1px solid var(--line);border-radius:10px;background:rgba(110,180,220,.06)}.team-member-row .field{min-width:0}.team-remove{height:34px;min-width:34px}.app-footer{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:14px 22px;border-top:1px solid var(--line);background:#FFFFFF;color:var(--muted);font-size:10px}.app-footer strong{color:#003C64;font-weight:500}
     .form-overlay{position:fixed;inset:0;background:rgba(0,35,55,.55);z-index:90;display:flex;align-items:center;justify-content:center;padding:18px}.modal{width:min(720px,96vw);max-height:90vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:var(--shadow)}.modal-head{padding:16px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center}.modal-head h3{font:700 20px var(--font-title);color:var(--blue-dark);margin:0;flex:1}.modal-head button{border:0;background:#eef4f7;width:31px;height:31px;border-radius:8px}.modal-body{padding:17px 19px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:8px;padding:9px 10px;color:var(--text);background:#fff;font-size:11px}.field textarea{min-height:74px;resize:vertical}.modal-actions{display:flex;justify-content:flex-end;gap:7px;padding:12px 19px 17px}
     .notice{position:fixed;right:18px;bottom:18px;z-index:120;background:var(--blue-dark);color:#fff;padding:11px 15px;border-radius:10px;box-shadow:var(--shadow);font-size:11px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s}.notice.show{opacity:1;transform:none}
+    .diff-modal{width:min(880px,97vw);max-height:92vh;overflow:hidden;display:flex;flex-direction:column;background:#fff;border-radius:16px;box-shadow:var(--shadow)}
+    .diff-modal .modal-head{padding:16px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+    .diff-modal .modal-head h3{font:700 20px var(--font-title);color:var(--blue-dark);margin:0;flex:1}
+    .diff-summary{padding:12px 19px;background:rgba(110,180,220,.10);border-bottom:1px solid var(--line);font-size:11px;color:var(--blue-dark);display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .diff-summary b{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2px;font-weight:800}
+    .diff-summary strong{display:block;font-size:16px;color:var(--blue-dark)}
+    .diff-body{overflow:auto;padding:0;flex:1}
+    .diff-group{border-bottom:1px solid var(--line)}
+    .diff-group-head{padding:11px 19px;background:#F7FAFC;display:flex;align-items:center;gap:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--blue-dark);position:sticky;top:0;z-index:2}
+    .diff-group-head:hover{background:#EDF4F7}
+    .diff-group-head input[type="checkbox"]{width:16px;height:16px;accent-color:var(--blue);cursor:pointer}
+    .diff-group-head .toggle-caret{margin-left:auto;font-size:10px;color:var(--muted);transition:transform .15s}
+    .diff-group.collapsed .toggle-caret{transform:rotate(-90deg)}
+    .diff-group.collapsed .diff-list{display:none}
+    .diff-list{padding:6px 19px 12px}
+    .diff-item{display:flex;gap:9px;align-items:flex-start;padding:8px 6px;border-bottom:1px dashed #E2E9ED;font-size:11px;line-height:1.5}
+    .diff-item:last-child{border-bottom:0}
+    .diff-item input[type="checkbox"]{width:15px;height:15px;margin-top:2px;accent-color:var(--blue);cursor:pointer;flex:0 0 auto}
+    .diff-item-body{flex:1;min-width:0}
+    .diff-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:4px;margin-right:6px}
+    .diff-tag.new{background:#E7F5EC;color:#146447}
+    .diff-tag.mod{background:#FFF3D9;color:#7A5300}
+    .diff-tag.del{background:#FDECEE;color:#7D0041}
+    .diff-fields{margin-top:5px;padding:6px 9px;background:#F7FAFC;border-left:3px solid var(--blue-light);border-radius:4px;font-size:10px;color:var(--muted)}
+    .diff-fields div{margin:2px 0}
+    .diff-fields b{color:var(--blue-dark);font-weight:700}
+    .diff-fields .before{color:#7D0041;text-decoration:line-through}
+    .diff-fields .after{color:#146447;font-weight:500}
+    .diff-empty{padding:18px;text-align:center;color:var(--muted);font-size:11px}
+    .diff-modal .modal-actions{padding:12px 19px;border-top:1px solid var(--line);display:flex;gap:8px;align-items:center;background:#FFFFFF}
+    .diff-modal .modal-actions .diff-counter{flex:1;font-size:11px;color:var(--blue-dark);font-weight:500}
     @media print{
       @page{size:A4 landscape;margin:10mm}
       body{background:#FFFFFF!important;color:#333333!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -121,7 +152,7 @@
     <button class="btn edit-ui-btn hidden" id="editUITextBtn" onclick="openUITextForm()">Editar textos da tela</button>
     <button class="btn" onclick="printMap()" title="Imprimir o mapa completo dos processos">⎙ Imprimir mapa</button>
     <button class="btn" onclick="exportState()">Exportar JSON</button>
-    <button class="btn" onclick="document.getElementById('importFile').click()">Importar</button>
+    <button class="btn" onclick="document.getElementById('importFile').click()" title="Importar JSON de outro membro da equipe: mostra o diff antes de aplicar">Importar diff</button>
     <input class="hidden" type="file" id="importFile" accept=".json,.txt,application/json">
     <button class="btn danger" onclick="resetState()">Resetar tudo</button>
   </div>
@@ -406,7 +437,37 @@
         ['Conferir IRRF e bases tributáveis','ADP / eSocial','Mensal','Prazo legal','Crítico','DARF e conferência'],
         ['Gerar contabilização, provisões e relatórios gerenciais','SSA / Contábil','Mensal','Após fechamento','Crítico','Interface e aceite'],
         ['Arquivar evidências e atualizar indicadores','Dossiê / BI','Mensal','D+3 fechamento','Alto','Pasta e dashboard']
-      ],68)
+      ],68),
+      proc('13','Lançamento de Fornecedores','¤','#003C64','Ana','Anderson',['Nota Fiscal','Boleto','Contrato','Matriz de fornecedores','Rateio','Aprovação'],['NF lançada','SSA registrado','Pipefy aprovado','Rateio validado','Pagamento liberado','Dossiê arquivado'],[
+        'Operar aproximadamente 45 fornecedores recorrentes por vencimento: dia 01 (Wellhub, Sul América Odonto/AM Médico, Sonova Cuida, Aprendiz, Frutas Copa, CIA Estágio, Sindicatos, Univers, MetLife), dia 05 (WTW, CENESP Estacionamento), dia 10 (ADP BPO, SUATV, Bolo Aniversário), dia 15 (Essence, Repponto, Veloe, ALELO, iFood VR, RB VT, Brasilprev, FGTS/INSS/IRRF, PRAN), dia 20 (SOULAN, Petlove) e Demanda (R&S, Advocacia, Alphacard, Eventos, Folha, Pensão).',
+        'Compromisso operacional: lançar NF em até 24 horas do recebimento, sem exceção.',
+        'Aplicar corretamente o critério de rateio: FTE DA NF, GERAL FTE, MATRIZ FTE, FTE DO PROCESSO ou Demanda.',
+        'Monitorar CENESP Estacionamento (22 vagas contratadas) e Benefício Tempo de Casa (marcos por milestone) como demandas contínuas de benefícios.',
+        'Integrar fluxo NF → SSA → Pipefy → aprovação → conciliação → pagamento com evidência em cada etapa.',
+        'Tratar fornecedores diretos (débito automático) e fornecedores por boleto/NF com controles distintos.'
+      ],[
+        ['Manter matriz de fornecedores por vencimento, alias e rateio','Planilha Fornecedores / SSA','Mensal','Até dia 25 do mês anterior','Crítico','Matriz atualizada e revisada'],
+        ['Receber NF, boleto ou fatura pelo canal oficial','E-mail / Portal fornecedor','Contínuo','Imediato ao recebimento','Crítico','Documento arquivado e etiquetado'],
+        ['Validar CNPJ, competência, valor, natureza e vencimento','SSA / matriz','Por documento','Antes do lançamento','Crítico','Validação registrada em planilha'],
+        ['Classificar critério de rateio (FTE NF, GERAL, MATRIZ, PROCESSO, Demanda)','SSA / matriz','Por documento','Antes do lançamento','Crítico','Rateio identificado e aprovado'],
+        ['Lançar NF ou boleto no SSA em até 24h do recebimento','SSA','Por documento','Máximo 24h','Crítico','Nº do lançamento SSA'],
+        ['Executar rateio no SSA por FTE/CDC e validar contabilização','SSA / FTE','Por lançamento','Antes do envio ao Pipefy','Crítico','Rateio aprovado e conciliado'],
+        ['Importar solicitação para o Pipefy com dados do SSA','Pipefy','Por lançamento','Mesmo dia do rateio','Crítico','Protocolo Pipefy gerado'],
+        ['Garantir aprovação na alçada correta conforme valor e natureza','Pipefy / matriz alçadas','Por lançamento','SLA da alçada','Crítico','Aprovação registrada'],
+        ['Monitorar SLA de aprovação e escalar em caso de atraso','Pipefy / Coordenação','Diário','Até vencimento','Alto','Escalonamento documentado'],
+        ['Monitorar envio da NF/boleto pelo fornecedor no prazo','E-mail / Portal / cobrança ativa','Semanal','Antes do vencimento','Alto','Comunicação com fornecedor'],
+        ['Lançar fornecedores com vencimento dia 01 do mês','SSA / Pipefy','Mensal','Até dia 01','Crítico','Todos lançados e aprovados'],
+        ['Lançar fornecedores com vencimento dia 05 do mês','SSA / Pipefy','Mensal','Até dia 05','Crítico','Todos lançados e aprovados'],
+        ['Lançar fornecedores com vencimento dia 10 do mês','SSA / Pipefy','Mensal','Até dia 10','Crítico','Todos lançados e aprovados'],
+        ['Lançar fornecedores com vencimento dia 15 do mês','SSA / Pipefy','Mensal','Até dia 15','Crítico','Todos lançados e aprovados'],
+        ['Lançar fornecedores com vencimento dia 20 do mês','SSA / Pipefy','Mensal','Até dia 20','Crítico','Todos lançados e aprovados'],
+        ['Tratar demandas sob solicitação (R&S, Advocacia, Alphacard, Eventos, Pensão)','SSA / Pipefy','Por demanda','SLA acordado','Alto','Demanda protocolada e aprovada'],
+        ['Monitorar Benefício Vagas de Estacionamento CENESP (22 vagas)','CENESP / Planilha ocupação','Mensal','Até dia 05','Alto','Espelho de ocupação vs contrato'],
+        ['Monitorar Benefício Tempo de Casa por milestones (1/3/5/10/15/20 anos)','People BI / RH Mensal','Mensal','Até dia 05','Alto','Lista de milestones e entregas registradas'],
+        ['Conciliar boletos, NFs e pagamentos com fatura consolidada','SSA / Financeiro','Mensal','Até dia 25','Crítico','Conciliação fechada e assinada'],
+        ['Arquivar dossiê digital do fornecedor e evidências','Dossiê digital','Por lançamento','D+3 do pagamento','Alto','Dossiê completo com NF, aprovação e comprovante'],
+        ['Atualizar indicadores de SLA, atraso, rejeição e volume','BI / Dashboard fornecedores','Mensal','Até dia 05','Alto','Dashboard mensal publicado']
+      ],52)
     ];
 
     const UI_DEFAULTS={
@@ -419,7 +480,7 @@
       footerLeft:'DP 360 Sonova · Uso interno',footerSignature:'Anderson Marinho | Igarapé Digital'
     };
     const DEFAULT_MEMBER_COLORS={Anderson:'#003C64',Jair:'#0083CA',Eduarda:'#7D0041',Ana:'#6EB4DC',Sabrina:'#7D0041',Jameson:'#003C64'};
-    const DEFAULT_STATE={version:'dp360-sonova-4',updatedAt:new Date().toISOString(),processes:DEFAULT_PROCESSES,todos:[
+    const DEFAULT_STATE={version:'dp360-sonova-5',updatedAt:new Date().toISOString(),processes:DEFAULT_PROCESSES,todos:[
       {id:'td-folha-0726',processId:'p12',title:'Folha 07/2026 — Brasil',context:'Cluster Sonova · competência 07/2026',company:'Todas as empresas',cnpj:'Consolidado',competence:'07/2026',assignee:'Jair',dueDate:'2026-07-22',status:'Em andamento',completedSteps:['12-01','12-02','12-03','12-04','12-05','12-06','12-07','12-08','12-09','12-10','12-11'],notes:'Prazo fatal interno para garantir aprovações e pagamento.',createdAt:'2026-07-01'},
       {id:'td-nr1',processId:'p08',title:'NR-1 — pesquisa psicossocial e plano',context:'Essence · comunicação e coleta Brasil',company:'Sonova Brasil',cnpj:'Todos aplicáveis',competence:'07/2026',assignee:'Jameson',dueDate:'2026-07-31',status:'Em andamento',completedSteps:['08-01','08-12'],notes:'Acompanhar liberação de e-mails, pesquisa e integração ao PGR.',createdAt:'2026-07-01'},
       {id:'td-ponto',processId:'p11',title:'Implantação ADP Ponto e Banco de Horas',context:'Preparação, parametrização, piloto e treinamento',company:'Sonova Brasil',cnpj:'Escopo do projeto',competence:'09/2026',assignee:'Anderson',dueDate:'2026-09-01',status:'Em andamento',completedSteps:['11-01','11-02','11-03','11-04'],notes:'Condução Sonova com apoio do time.',createdAt:'2026-06-24'}
@@ -469,7 +530,7 @@
         p.assignedMembers=[...new Set((Array.isArray(p.assignedMembers)?p.assignedMembers:legacyMembers).filter(Boolean))];
         if(p.owner&&!p.assignedMembers.includes(p.owner))p.assignedMembers.unshift(p.owner);
       });
-      x.version='dp360-sonova-4';
+      x.version='dp360-sonova-5';
       x.team=Array.isArray(x.team)?x.team.filter(Boolean):[...TEAM];
       x.memberColors={...DEFAULT_MEMBER_COLORS,...(x.memberColors||{})};
       x.quickChecks=x.quickChecks||{};
@@ -675,8 +736,248 @@
       if(currentProcessId){const p=processById(currentProcessId);if(p)p.steps.forEach(s=>{expandedStep=null});}
       setTimeout(()=>{window.print();setTimeout(()=>document.body.classList.remove('print-mode-process'),400)},250);
     }
-    function guessProcess(text=''){const n=text.toLowerCase();const rules=[['p01',['admiss','onboarding','carta oferta']],['p02',['férias','ferias','afast','atestado','licença']],['p03',['ponto','jornada','banco de horas','rep']],['p04',['cadastro','transfer','movimenta','salário','salario','cargo','centro de custo']],['p05',['atendimento','chamado','askhr','faq']],['p06',['benef','vr',' va ','vt','ifood','alelo','wellhub','petlove','previd']],['p07',['rescis','deslig','demissão','demissao','offboarding']],['p08',['sst','aso','pgr','pcmso','nr-1','nr1','cipa','epi']],['p09',['saúde','saude','odonto','copay','coparticip','sulamerica','sulamérica','wtw']],['p10',['comiss','plr','vcc','bônus','bonus','premia','remuneração']],['p11',['projeto','implant','integra','incorpora','auditoria','melhoria','rpa']],['p12',['folha','encargo','esocial','e-social','fgts','inss','dctf','irrf','contábil','contabil','quinzenal']]];return(rules.find(r=>r[1].some(k=>n.includes(k)))||['p11'])[0]}
-    document.getElementById('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const x=JSON.parse(rd.result);if(x.processes&&x.todos){state=x;saveState('Base importada');notify('Base DP 360 carregada');return}let imported=[];if(Array.isArray(x.actions))imported=x.actions.map(a=>({id:'legacy-'+(a.id||uid()),processId:guessProcess([a.program,a.title,a.description,a.source].join(' ')),title:a.title||'Ação importada',context:[a.source,a.program].filter(Boolean).join(' · '),company:'',cnpj:'',competence:'',assignee:a.owner||'',dueDate:String(a.end||a.endPlan||'').slice(0,10),status:String(a.status||'Não iniciado').includes('Conclu')?'Concluído':String(a.status||'').includes('andamento')?'Em andamento':String(a.status||'').includes('Aguard')?'Aguardando':'Não iniciado',completedSteps:[],notes:a.description||a.notes||'',createdAt:today()}));if(x.activityData){Object.values(x.activityData).flat().forEach(a=>imported.push({id:'legacy-'+(a.id||uid()),processId:guessProcess(a.text+' '+a.obs),title:(a.text||'Ação importada').trim(),context:'Gerenciador de Atividades',company:'',cnpj:'',competence:'',assignee:a.responsavel||'',dueDate:String(a.fim||'').slice(0,10),status:String(a.status||'').toLowerCase().includes('conclu')?'Concluído':'Não iniciado',completedSteps:[],notes:a.obs||'',createdAt:today()}))}if(imported.length){const seen=new Set(state.todos.map(t=>t.id));state.todos.push(...imported.filter(t=>!seen.has(t.id)));saveState(imported.length+' ações importadas');notify(imported.length+' ações convertidas em To Dos');setView('todos')}else throw new Error('Formato não reconhecido')}catch(err){notify('Arquivo não reconhecido. Use exportação DP 360 ou JSON legado.')}};rd.readAsText(f);e.target.value=''}
+    function guessProcess(text=''){const n=text.toLowerCase();const rules=[['p01',['admiss','onboarding','carta oferta']],['p02',['férias','ferias','afast','atestado','licença']],['p03',['ponto','jornada','banco de horas','rep']],['p04',['cadastro','transfer','movimenta','salário','salario','cargo','centro de custo']],['p05',['atendimento','chamado','askhr','faq']],['p06',['benef','vr',' va ','vt','ifood','alelo','wellhub','petlove','previd']],['p07',['rescis','deslig','demissão','demissao','offboarding']],['p08',['sst','aso','pgr','pcmso','nr-1','nr1','cipa','epi']],['p09',['saúde','saude','odonto','copay','coparticip','sulamerica','sulamérica','wtw']],['p10',['comiss','plr','vcc','bônus','bonus','premia','remuneração']],['p11',['projeto','implant','integra','incorpora','auditoria','melhoria','rpa']],['p12',['folha','encargo','esocial','e-social','fgts','inss','dctf','irrf','contábil','contabil','quinzenal']],['p13',['nota fiscal','nf ','fornecedor','ssa','pipefy','rateio fte','boleto','cenesp','estacionamento','tempo de casa','fatura']]];return(rules.find(r=>r[1].some(k=>n.includes(k)))||['p11'])[0]}
+    document.getElementById('importFile').onchange=e=>{
+      const f=e.target.files[0];if(!f)return;
+      const rd=new FileReader();
+      rd.onload=()=>{
+        try{
+          const x=JSON.parse(rd.result);
+          if(x.processes&&x.todos&&(x.version||'').startsWith('dp360-sonova')){
+            const diff=computeDiff(state,x);
+            if(diffIsEmpty(diff)){notify('Arquivo idêntico ao estado atual · nada a importar');return}
+            openImportDiffModal(diff,x);
+            return;
+          }
+          let imported=[];
+          if(Array.isArray(x.actions))imported=x.actions.map(a=>({id:'legacy-'+(a.id||uid()),processId:guessProcess([a.program,a.title,a.description,a.source].join(' ')),title:a.title||'Ação importada',context:[a.source,a.program].filter(Boolean).join(' · '),company:'',cnpj:'',competence:'',assignee:a.owner||'',dueDate:String(a.end||a.endPlan||'').slice(0,10),status:String(a.status||'Não iniciado').includes('Conclu')?'Concluído':String(a.status||'').includes('andamento')?'Em andamento':String(a.status||'').includes('Aguard')?'Aguardando':'Não iniciado',completedSteps:[],notes:a.description||a.notes||'',createdAt:today()}));
+          if(x.activityData){Object.values(x.activityData).flat().forEach(a=>imported.push({id:'legacy-'+(a.id||uid()),processId:guessProcess(a.text+' '+a.obs),title:(a.text||'Ação importada').trim(),context:'Gerenciador de Atividades',company:'',cnpj:'',competence:'',assignee:a.responsavel||'',dueDate:String(a.fim||'').slice(0,10),status:String(a.status||'').toLowerCase().includes('conclu')?'Concluído':'Não iniciado',completedSteps:[],notes:a.obs||'',createdAt:today()}))}
+          if(imported.length){const seen=new Set(state.todos.map(t=>t.id));state.todos.push(...imported.filter(t=>!seen.has(t.id)));saveState(imported.length+' ações importadas');notify(imported.length+' ações convertidas em To Dos');setView('todos')}
+          else throw new Error('Formato não reconhecido');
+        }catch(err){console.error(err);notify('Arquivo não reconhecido. Use exportação DP 360 ou JSON legado.')}
+      };
+      rd.readAsText(f);e.target.value='';
+    }
+
+    // ==================== SISTEMA DE DIFF DA IMPORTAÇÃO ====================
+    const PROCESS_FIELDS=['name','code','icon','color','owner','coverageMode','description','maturity'];
+    const PROCESS_ARRAY_FIELDS=['assignedMembers','inputs','outputs','particularities'];
+    const STEP_FIELDS=['title','system','frequency','sla','criticality','evidence','instruction','exceptions'];
+    const TODO_FIELDS=['title','context','company','cnpj','competence','assignee','dueDate','status','notes','processId'];
+    const TODO_ARRAY_FIELDS=['completedSteps'];
+    const TRAINING_FIELDS=['member','tutor','status','notes','processId'];
+    const TRAINING_ARRAY_FIELDS=['completedLessons'];
+
+    function eq(a,b){if(a===b)return true;if(a==null&&b==null)return true;if(Array.isArray(a)&&Array.isArray(b))return a.length===b.length&&a.every((v,i)=>eq(v,b[i]));if(typeof a==='object'&&typeof b==='object'&&a&&b){const ka=Object.keys(a),kb=Object.keys(b);return ka.length===kb.length&&ka.every(k=>eq(a[k],b[k]))}return String(a||'')===String(b||'')}
+
+    function diffFields(cur,inc,fields,arrayFields=[]){
+      const changes=[];
+      fields.forEach(f=>{if(!eq(cur[f],inc[f]))changes.push({field:f,before:cur[f],after:inc[f]})});
+      arrayFields.forEach(f=>{if(!eq(cur[f]||[],inc[f]||[]))changes.push({field:f,before:cur[f]||[],after:inc[f]||[],isArray:true})});
+      return changes;
+    }
+
+    function computeDiff(cur,inc){
+      const diff={processes:{added:[],removed:[],modified:[]},steps:{added:[],removed:[],modified:[]},todos:{added:[],removed:[],modified:[]},trainings:{added:[],removed:[],modified:[]},team:null};
+      const curProcMap=new Map((cur.processes||[]).map(p=>[p.id,p]));
+      const incProcMap=new Map((inc.processes||[]).map(p=>[p.id,p]));
+
+      incProcMap.forEach((incP,id)=>{
+        const curP=curProcMap.get(id);
+        if(!curP){diff.processes.added.push(incP);(incP.steps||[]).forEach(s=>diff.steps.added.push({processId:id,processName:incP.name,step:s}))}
+        else{
+          const changes=diffFields(curP,incP,PROCESS_FIELDS,PROCESS_ARRAY_FIELDS);
+          if(changes.length)diff.processes.modified.push({id,name:incP.name,curName:curP.name,changes});
+          const curStepMap=new Map((curP.steps||[]).map(s=>[s.id,s]));
+          const incStepMap=new Map((incP.steps||[]).map(s=>[s.id,s]));
+          incStepMap.forEach((incS,sid)=>{
+            const curS=curStepMap.get(sid);
+            if(!curS)diff.steps.added.push({processId:id,processName:incP.name,step:incS});
+            else{const stepChanges=diffFields(curS,incS,STEP_FIELDS);if(stepChanges.length)diff.steps.modified.push({processId:id,processName:incP.name,stepId:sid,stepCode:incS.code,stepTitle:incS.title,curTitle:curS.title,changes:stepChanges})}
+          });
+          curStepMap.forEach((curS,sid)=>{if(!incStepMap.has(sid))diff.steps.removed.push({processId:id,processName:incP.name,stepId:sid,step:curS})});
+        }
+      });
+      curProcMap.forEach((curP,id)=>{if(!incProcMap.has(id))diff.processes.removed.push(curP)});
+
+      const curTodoMap=new Map((cur.todos||[]).map(t=>[t.id,t]));
+      const incTodoMap=new Map((inc.todos||[]).map(t=>[t.id,t]));
+      incTodoMap.forEach((incT,id)=>{
+        const curT=curTodoMap.get(id);
+        if(!curT)diff.todos.added.push(incT);
+        else{const changes=diffFields(curT,incT,TODO_FIELDS,TODO_ARRAY_FIELDS);if(changes.length)diff.todos.modified.push({id,title:incT.title,curTitle:curT.title,changes})}
+      });
+      curTodoMap.forEach((curT,id)=>{if(!incTodoMap.has(id))diff.todos.removed.push(curT)});
+
+      const curTrMap=new Map((cur.trainings||[]).map(t=>[t.id,t]));
+      const incTrMap=new Map((inc.trainings||[]).map(t=>[t.id,t]));
+      incTrMap.forEach((incT,id)=>{
+        const curT=curTrMap.get(id);
+        if(!curT)diff.trainings.added.push(incT);
+        else{const changes=diffFields(curT,incT,TRAINING_FIELDS,TRAINING_ARRAY_FIELDS);if(changes.length)diff.trainings.modified.push({id,member:incT.member,changes})}
+      });
+      curTrMap.forEach((curT,id)=>{if(!incTrMap.has(id))diff.trainings.removed.push(curT)});
+
+      const curTeam=[...(cur.team||[])].sort(),incTeam=[...(inc.team||[])].sort();
+      if(!eq(curTeam,incTeam))diff.team={before:curTeam,after:incTeam};
+      return diff;
+    }
+
+    function diffIsEmpty(d){return !d.processes.added.length&&!d.processes.removed.length&&!d.processes.modified.length&&!d.steps.added.length&&!d.steps.removed.length&&!d.steps.modified.length&&!d.todos.added.length&&!d.todos.removed.length&&!d.todos.modified.length&&!d.trainings.added.length&&!d.trainings.removed.length&&!d.trainings.modified.length&&!d.team}
+
+    function fmtVal(v){if(v==null||v==='')return '<em style="color:var(--muted)">vazio</em>';if(Array.isArray(v))return v.length?v.map(x=>esc(String(x))).join(' · '):'<em style="color:var(--muted)">vazio</em>';return esc(String(v))}
+
+    function fieldChangesHTML(changes){return changes.map(c=>`<div><b>${esc(c.field)}:</b> <span class="before">${fmtVal(c.before)}</span> → <span class="after">${fmtVal(c.after)}</span></div>`).join('')}
+
+    function openImportDiffModal(diff,incoming){
+      const totalChanges=diff.processes.added.length+diff.processes.removed.length+diff.processes.modified.length+diff.steps.added.length+diff.steps.removed.length+diff.steps.modified.length+diff.todos.added.length+diff.todos.removed.length+diff.todos.modified.length+diff.trainings.added.length+diff.trainings.removed.length+diff.trainings.modified.length+(diff.team?1:0);
+      const stepsAddedByProcess={};diff.steps.added.forEach(s=>{(stepsAddedByProcess[s.processName]=stepsAddedByProcess[s.processName]||[]).push(s)});
+      const stepsModByProcess={};diff.steps.modified.forEach(s=>{(stepsModByProcess[s.processName]=stepsModByProcess[s.processName]||[]).push(s)});
+      const stepsRemByProcess={};diff.steps.removed.forEach(s=>{(stepsRemByProcess[s.processName]=stepsRemByProcess[s.processName]||[]).push(s)});
+
+      const procSection=(diff.processes.added.length||diff.processes.removed.length||diff.processes.modified.length)?`
+        <div class="diff-group" data-group="processes">
+          <div class="diff-group-head" onclick="toggleDiffGroup(this)">
+            <input type="checkbox" data-group-check="processes" checked onclick="event.stopPropagation();toggleGroupChecks(this)">
+            <span>Processos · ${diff.processes.added.length+diff.processes.removed.length+diff.processes.modified.length} mudanças</span>
+            <span class="toggle-caret">▼</span>
+          </div>
+          <div class="diff-list">
+            ${diff.processes.added.map((p,i)=>`<label class="diff-item"><input type="checkbox" data-diff="proc-add-${i}" checked><div class="diff-item-body"><span class="diff-tag new">Novo</span><b>${esc(p.code)} — ${esc(p.name)}</b> (${(p.steps||[]).length} atividades, dono ${esc(p.owner||'—')})</div></label>`).join('')}
+            ${diff.processes.modified.map((p,i)=>`<label class="diff-item"><input type="checkbox" data-diff="proc-mod-${i}" checked><div class="diff-item-body"><span class="diff-tag mod">Alterado</span><b>${esc(p.curName)}</b>${p.name!==p.curName?` → ${esc(p.name)}`:''}<div class="diff-fields">${fieldChangesHTML(p.changes)}</div></div></label>`).join('')}
+            ${diff.processes.removed.map((p,i)=>`<label class="diff-item"><input type="checkbox" data-diff="proc-del-${i}"><div class="diff-item-body"><span class="diff-tag del">Removido no arquivo</span><b>${esc(p.code)} — ${esc(p.name)}</b> · marcar apaga do seu estado atual</div></label>`).join('')}
+          </div>
+        </div>`:'';
+
+      const stepsSection=(diff.steps.added.length||diff.steps.removed.length||diff.steps.modified.length)?`
+        <div class="diff-group" data-group="steps">
+          <div class="diff-group-head" onclick="toggleDiffGroup(this)">
+            <input type="checkbox" data-group-check="steps" checked onclick="event.stopPropagation();toggleGroupChecks(this)">
+            <span>Atividades · ${diff.steps.added.length+diff.steps.removed.length+diff.steps.modified.length} mudanças em ${new Set([...Object.keys(stepsAddedByProcess),...Object.keys(stepsModByProcess),...Object.keys(stepsRemByProcess)]).size} processos</span>
+            <span class="toggle-caret">▼</span>
+          </div>
+          <div class="diff-list">
+            ${diff.steps.added.map((s,i)=>`<label class="diff-item"><input type="checkbox" data-diff="step-add-${i}" checked><div class="diff-item-body"><span class="diff-tag new">Nova</span><small style="color:var(--muted)">${esc(s.processName)}</small> · <b>${esc(s.step.code)}</b> ${esc(s.step.title)}</div></label>`).join('')}
+            ${diff.steps.modified.map((s,i)=>`<label class="diff-item"><input type="checkbox" data-diff="step-mod-${i}" checked><div class="diff-item-body"><span class="diff-tag mod">Alterada</span><small style="color:var(--muted)">${esc(s.processName)}</small> · <b>${esc(s.stepCode)}</b> ${esc(s.curTitle)}<div class="diff-fields">${fieldChangesHTML(s.changes)}</div></div></label>`).join('')}
+            ${diff.steps.removed.map((s,i)=>`<label class="diff-item"><input type="checkbox" data-diff="step-del-${i}"><div class="diff-item-body"><span class="diff-tag del">Removida no arquivo</span><small style="color:var(--muted)">${esc(s.processName)}</small> · <b>${esc(s.step.code)}</b> ${esc(s.step.title)}</div></label>`).join('')}
+          </div>
+        </div>`:'';
+
+      const todoSection=(diff.todos.added.length||diff.todos.removed.length||diff.todos.modified.length)?`
+        <div class="diff-group" data-group="todos">
+          <div class="diff-group-head" onclick="toggleDiffGroup(this)">
+            <input type="checkbox" data-group-check="todos" checked onclick="event.stopPropagation();toggleGroupChecks(this)">
+            <span>To Dos / execuções · ${diff.todos.added.length+diff.todos.removed.length+diff.todos.modified.length} mudanças</span>
+            <span class="toggle-caret">▼</span>
+          </div>
+          <div class="diff-list">
+            ${diff.todos.added.map((t,i)=>`<label class="diff-item"><input type="checkbox" data-diff="todo-add-${i}" checked><div class="diff-item-body"><span class="diff-tag new">Nova</span><b>${esc(t.title)}</b> · ${esc(t.assignee||'sem responsável')} · ${esc(t.status||'')}</div></label>`).join('')}
+            ${diff.todos.modified.map((t,i)=>`<label class="diff-item"><input type="checkbox" data-diff="todo-mod-${i}" checked><div class="diff-item-body"><span class="diff-tag mod">Alterada</span><b>${esc(t.curTitle)}</b><div class="diff-fields">${fieldChangesHTML(t.changes)}</div></div></label>`).join('')}
+            ${diff.todos.removed.map((t,i)=>`<label class="diff-item"><input type="checkbox" data-diff="todo-del-${i}"><div class="diff-item-body"><span class="diff-tag del">Removida no arquivo</span><b>${esc(t.title)}</b></div></label>`).join('')}
+          </div>
+        </div>`:'';
+
+      const trainingSection=(diff.trainings.added.length||diff.trainings.removed.length||diff.trainings.modified.length)?`
+        <div class="diff-group" data-group="trainings">
+          <div class="diff-group-head" onclick="toggleDiffGroup(this)">
+            <input type="checkbox" data-group-check="trainings" checked onclick="event.stopPropagation();toggleGroupChecks(this)">
+            <span>Trilhas de treinamento · ${diff.trainings.added.length+diff.trainings.removed.length+diff.trainings.modified.length} mudanças</span>
+            <span class="toggle-caret">▼</span>
+          </div>
+          <div class="diff-list">
+            ${diff.trainings.added.map((t,i)=>`<label class="diff-item"><input type="checkbox" data-diff="tr-add-${i}" checked><div class="diff-item-body"><span class="diff-tag new">Nova</span><b>${esc(t.member)}</b> · ${esc(t.status||'')}</div></label>`).join('')}
+            ${diff.trainings.modified.map((t,i)=>`<label class="diff-item"><input type="checkbox" data-diff="tr-mod-${i}" checked><div class="diff-item-body"><span class="diff-tag mod">Alterada</span><b>${esc(t.member)}</b><div class="diff-fields">${fieldChangesHTML(t.changes)}</div></div></label>`).join('')}
+            ${diff.trainings.removed.map((t,i)=>`<label class="diff-item"><input type="checkbox" data-diff="tr-del-${i}"><div class="diff-item-body"><span class="diff-tag del">Removida no arquivo</span><b>${esc(t.member)}</b></div></label>`).join('')}
+          </div>
+        </div>`:'';
+
+      const teamSection=diff.team?`
+        <div class="diff-group" data-group="team">
+          <div class="diff-group-head" onclick="toggleDiffGroup(this)">
+            <input type="checkbox" data-group-check="team" onclick="event.stopPropagation();toggleGroupChecks(this)">
+            <span>Equipe · lista de membros mudou</span>
+            <span class="toggle-caret">▼</span>
+          </div>
+          <div class="diff-list">
+            <label class="diff-item"><input type="checkbox" data-diff="team-change"><div class="diff-item-body"><span class="diff-tag mod">Alterado</span>Time atual: ${esc(diff.team.before.join(', '))}<br>Time no arquivo: ${esc(diff.team.after.join(', '))}<br><small style="color:var(--muted)">Marcar sobrescreve a equipe local pela do arquivo</small></div></label>
+          </div>
+        </div>`:'';
+
+      const html=`<div class="form-overlay" id="formOverlay"><div class="diff-modal">
+        <div class="modal-head"><h3>Revisar mudanças da importação</h3><button type="button" onclick="closeForm()" aria-label="Fechar">×</button></div>
+        <div class="diff-summary">
+          <div><b>Seu estado atual</b><strong>${state.processes.length}</strong>processos · ${state.processes.reduce((n,p)=>n+p.steps.length,0)} atividades</div>
+          <div><b>Base importada</b><strong>${(incoming.processes||[]).length}</strong>processos · ${(incoming.processes||[]).reduce((n,p)=>n+(p.steps||[]).length,0)} atividades</div>
+          <div><b>Mudanças detectadas</b><strong>${totalChanges}</strong>total de itens</div>
+          <div><b>Origem</b>${esc(incoming.updatedAt?new Date(incoming.updatedAt).toLocaleString('pt-BR'):'desconhecida')}</div>
+        </div>
+        <div class="diff-body" id="diffBody">
+          ${procSection}${stepsSection}${todoSection}${trainingSection}${teamSection}
+          ${!procSection&&!stepsSection&&!todoSection&&!trainingSection&&!teamSection?'<div class="diff-empty">Nenhuma diferença encontrada</div>':''}
+        </div>
+        <div class="modal-actions">
+          <span class="diff-counter" id="diffCounter">— seleções marcadas</span>
+          <button type="button" class="btn" onclick="markAllDiffs(true)">Marcar tudo</button>
+          <button type="button" class="btn" onclick="markAllDiffs(false)">Desmarcar tudo</button>
+          <button type="button" class="btn" onclick="closeForm()">Cancelar</button>
+          <button type="button" class="btn primary" onclick="applySelectedDiff()">Aplicar selecionadas</button>
+        </div>
+      </div></div>`;
+      document.getElementById('formHost').innerHTML=html;
+      window.__diffData={diff,incoming};
+      document.getElementById('diffBody').addEventListener('change',updateDiffCounter);
+      updateDiffCounter();
+    }
+
+    function toggleDiffGroup(head){head.parentElement.classList.toggle('collapsed')}
+    function toggleGroupChecks(check){const list=check.closest('.diff-group').querySelector('.diff-list');list.querySelectorAll('input[type="checkbox"][data-diff]').forEach(cb=>cb.checked=check.checked);updateDiffCounter()}
+    function markAllDiffs(on){document.querySelectorAll('#diffBody input[type="checkbox"]').forEach(cb=>cb.checked=on);updateDiffCounter()}
+    function updateDiffCounter(){const el=document.getElementById('diffCounter');if(!el)return;const n=document.querySelectorAll('#diffBody input[type="checkbox"][data-diff]:checked').length;const total=document.querySelectorAll('#diffBody input[type="checkbox"][data-diff]').length;el.textContent=`${n} de ${total} mudanças marcadas para aplicar`}
+
+    function isSelected(key){const cb=document.querySelector(`#diffBody input[data-diff="${key}"]`);return cb&&cb.checked}
+
+    function applySelectedDiff(){
+      const {diff,incoming}=window.__diffData||{};
+      if(!diff||!incoming){notify('Nada para aplicar');return}
+      let applied=0;
+
+      // Processos: novos
+      diff.processes.added.forEach((p,i)=>{if(isSelected(`proc-add-${i}`)){if(!state.processes.some(x=>x.id===p.id)){state.processes.push(clone(p));applied++}}});
+      // Processos: modificados (aplica apenas os campos que estão no diff)
+      diff.processes.modified.forEach((p,i)=>{if(isSelected(`proc-mod-${i}`)){const target=state.processes.find(x=>x.id===p.id);if(target){p.changes.forEach(c=>{target[c.field]=clone(c.after)});applied++}}});
+      // Processos: removidos (só apaga quando explicitamente marcado)
+      diff.processes.removed.forEach((p,i)=>{if(isSelected(`proc-del-${i}`)){state.processes=state.processes.filter(x=>x.id!==p.id);state.todos=state.todos.filter(t=>t.processId!==p.id);state.trainings=state.trainings.filter(t=>t.processId!==p.id);applied++}});
+
+      // Atividades: novas
+      diff.steps.added.forEach((s,i)=>{if(isSelected(`step-add-${i}`)){const p=state.processes.find(x=>x.id===s.processId);if(p&&!p.steps.some(st=>st.id===s.step.id)){p.steps.push(clone(s.step));renumber(p);applied++}}});
+      // Atividades: modificadas
+      diff.steps.modified.forEach((s,i)=>{if(isSelected(`step-mod-${i}`)){const p=state.processes.find(x=>x.id===s.processId);const step=p?.steps.find(x=>x.id===s.stepId);if(step){s.changes.forEach(c=>{step[c.field]=clone(c.after)});applied++}}});
+      // Atividades: removidas
+      diff.steps.removed.forEach((s,i)=>{if(isSelected(`step-del-${i}`)){const p=state.processes.find(x=>x.id===s.processId);if(p){p.steps=p.steps.filter(x=>x.id!==s.stepId);renumber(p);applied++}}});
+
+      // To Dos: novas
+      diff.todos.added.forEach((t,i)=>{if(isSelected(`todo-add-${i}`)){if(!state.todos.some(x=>x.id===t.id)){state.todos.push(clone(t));applied++}}});
+      // To Dos: modificadas
+      diff.todos.modified.forEach((t,i)=>{if(isSelected(`todo-mod-${i}`)){const target=state.todos.find(x=>x.id===t.id);if(target){t.changes.forEach(c=>{target[c.field]=clone(c.after)});applied++}}});
+      // To Dos: removidas
+      diff.todos.removed.forEach((t,i)=>{if(isSelected(`todo-del-${i}`)){state.todos=state.todos.filter(x=>x.id!==t.id);applied++}});
+
+      // Trilhas: novas
+      diff.trainings.added.forEach((t,i)=>{if(isSelected(`tr-add-${i}`)){if(!state.trainings.some(x=>x.id===t.id)){state.trainings.push(clone(t));applied++}}});
+      // Trilhas: modificadas
+      diff.trainings.modified.forEach((t,i)=>{if(isSelected(`tr-mod-${i}`)){const target=state.trainings.find(x=>x.id===t.id);if(target){t.changes.forEach(c=>{target[c.field]=clone(c.after)});applied++}}});
+      // Trilhas: removidas
+      diff.trainings.removed.forEach((t,i)=>{if(isSelected(`tr-del-${i}`)){state.trainings=state.trainings.filter(x=>x.id!==t.id);applied++}});
+
+      // Equipe
+      if(diff.team&&isSelected('team-change')){state.team=[...diff.team.after];applied++}
+
+      closeForm();
+      if(applied){saveState(`${applied} mudanças aplicadas via importação`);notify(`${applied} mudanças aplicadas com sucesso`)}
+      else notify('Nenhuma mudança foi marcada');
+      window.__diffData=null;
+    }
+    // ================ FIM SISTEMA DE DIFF ================
     function freshResetState(){const fresh=normalizeBrandColors(clone(DEFAULT_STATE));fresh.quickChecks={};fresh.todos.forEach(t=>{t.completedSteps=[];t.status='Não iniciado'});fresh.trainings.forEach(t=>{t.completedLessons=[];t.status='Não iniciado'});return fresh}
     function resetState(){if(!confirm('Resetar tudo? Serão removidas cópias, edições e marcações. Todos os checkboxes dos processos, To Dos e treinamentos ficarão desmarcados.'))return;clearSavedState();document.querySelectorAll('input[type="checkbox"]').forEach(input=>input.checked=false);document.querySelectorAll('.done').forEach(el=>el.classList.remove('done'));state=freshResetState();currentView='map';editMode=false;currentProcessId=currentTodoId=currentTrainingId=expandedStep=null;currentTab='flow';closeForm();closeDrawer();document.getElementById('search').value='';document.getElementById('ownerFilter').value='';document.getElementById('statusFilter').value='';const edit=document.getElementById('editToggle');edit.classList.remove('active');edit.textContent='Modo edição';document.getElementById('addProcessBtn').classList.add('hidden');document.getElementById('editUITextBtn').classList.add('hidden');saveState('Tudo restaurado e desmarcado');setView('map');notify('Todos os cards e checklists foram restaurados e desmarcados')}
     document.querySelectorAll('#mainNav button').forEach(b=>b.onclick=()=>setView(b.dataset.view));
